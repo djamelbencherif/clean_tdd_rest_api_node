@@ -1,0 +1,24 @@
+{
+  "name": "node_tdd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "set NODE_ENV=developpement&& set PORT=3000&& nodemon server.js",
+    "jest": "jest --watchAll"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "http-errors": "^1.8.0",
+    "mongoose": "^6.0.10"
+  },
+  "devDependencies": {
+    "jest": "^27.2.5",
+    "node-mocks-http": "^1.11.0",
+    "nodemon": "^2.0.13",
+    "supertest": "^6.1.6"
+  }
+}
