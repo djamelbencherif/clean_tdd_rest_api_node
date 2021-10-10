@@ -29,8 +29,7 @@ describe(`${endPoint} API `, () => {
       .get(endPoint + firstTodo._id)
       .expect("Content-Type", /json/)
       .expect(200);
-    expect(response.body.title).toBe(firstTodo.title);
-    expect(response.body.done).toBe(firstTodo.done);
+    expect(response.body).toMatchObject(firstTodo);
   });
   // TEST GOOD:#3 💚
   it(`POST ${endPoint} RETURN 201`, async () => {
@@ -45,6 +44,12 @@ describe(`${endPoint} API `, () => {
   // TEST BAD:#4 💔
   it(`POST ${endPoint} MISSING DATA`, async () => {
     await request(app).post(endPoint).send(missingTodo).expect(500);
+  });
+  // TEST BAD:#5 💔
+  it(`GET ONE ${endPoint} ID NOT FOUND `, async () => {
+    await request(app)
+      .get(endPoint + "12345")
+      .expect(500);
   });
 });
 

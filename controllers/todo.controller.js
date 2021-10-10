@@ -1,4 +1,10 @@
-const { findAll, insert, oneTodo, deleteOne } = require("../querys/todo.query");
+const {
+  findAll,
+  insert,
+  oneTodo,
+  deleteOne,
+  updateOneTodo,
+} = require("../querys/todo.query");
 const httpError = require("http-errors");
 // def middl get all todos
 exports.getAll = async (req, res, next) => {
@@ -21,7 +27,7 @@ exports.getOne = async (req, res, next) => {
     const id = req.params.id;
     const todo = await oneTodo(id);
     if (todo) {
-      res.status(200).json({ todo });
+      res.status(200).json(todo);
     } else {
       res.status(404).json({ error: { msg: "Impossible to return todo" } });
     }
@@ -40,6 +46,27 @@ exports.postOne = async (req, res, next) => {
     } else {
       res.status(404).json({ error: "Impossible to create todo" });
     }
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.updateOne = async (req, res, next) => {
+  try {
+    const _id = req.params.id;
+    const data = req.body;
+    const todo = await updateOneTodo({ _id, data });
+    if (todo) {
+      res.status(203).json(todo);
+    } else {
+      res.status(404).json({ error: { msg: "Impossible to update todo" } });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+exports.deleteOne = async (req, res, next) => {
+  try {
   } catch (error) {
     next(error);
   }

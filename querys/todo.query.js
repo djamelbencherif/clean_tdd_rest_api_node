@@ -19,3 +19,11 @@ exports.oneTodo = (_id) => {
 exports.deleteOne = (_id) => {
   return Todo.findOneAndDelete({ _id }).exec();
 };
+
+// update one tode
+exports.updateOneTodo = ({ _id, data }) => {
+  return Todo.findByIdAndUpdate(_id, data, {
+    new: true,
+    useFindAndModify: false,
+  });
+};
