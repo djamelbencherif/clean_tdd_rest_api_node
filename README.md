@@ -12,7 +12,7 @@ npm run jest
 ```
 ## UNIT AND INTEGRATION
 
-* Unit 👁 : In this part we test case by case the different parts of the todo contrllers
+* Unit 👁 : In this part we test case by case the different parts of the todo controllers
 * Integration 👀 : In this part we test the expected result of our http request on a given entry
 
 ## Author
