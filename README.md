@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to clean_tdd_node 👋</h1>
+<h1 align="center">Welcome to clean_tdd_node 👋 🥳</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=2592000" />
 </p>
@@ -10,6 +10,10 @@
 ```sh
 npm run jest
 ```
+## UNIT AND INTEGRATION
+
+* Unit 👁 : In this part we test case by case the different parts of the todo contrllers
+* Integration 👀 : In this part we test the expected result of our http request on a given entry
 
 ## Author
 
@@ -22,4 +26,4 @@ npm run jest
 Give a ⭐️ if this project helped you!
 
 ***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
+_This README was generated with ❤️ by[@djamelbencherif](https://github.com/djamelbencherif)
