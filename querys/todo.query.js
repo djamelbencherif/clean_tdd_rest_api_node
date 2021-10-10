@@ -12,7 +12,7 @@ exports.insert = (data) => {
 
 // return promise one data get
 exports.oneTodo = (_id) => {
-  return Todo.findOne({ _id }, { __v: 0 }).exec();
+  return Todo.findOne({ _id });
 };
 
 // delete one todo return promise

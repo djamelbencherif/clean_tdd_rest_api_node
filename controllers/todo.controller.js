@@ -14,6 +14,22 @@ exports.getAll = async (req, res, next) => {
   }
 };
 
+// def middl get one todo
+
+exports.getOne = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const todo = await oneTodo(id);
+    if (todo) {
+      res.status(200).json({ todo });
+    } else {
+      res.status(404).json({ error: { msg: "Impossible to return todo" } });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 // def middl insert todo
 exports.postOne = async (req, res, next) => {
   try {
@@ -22,9 +38,9 @@ exports.postOne = async (req, res, next) => {
     if (todo) {
       res.status(201).json(todo);
     } else {
-      res.status(500).json({ error: "Impossible to creta todo" });
+      res.status(404).json({ error: "Impossible to create todo" });
     }
   } catch (error) {
-    next(httpError(500, error));
+    next(error);
   }
 };

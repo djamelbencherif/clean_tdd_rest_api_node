@@ -1,11 +1,11 @@
 const request = require("supertest");
 const app = require("../../app");
 const { connect, closed, itsOkMongo } = require("../../database");
-const endPoint = "/todo";
+const endPoint = "/todo/";
 const oneTodo = require("../mooks/oneTodo.json");
 const allTodos = require("../mooks/allTodos.json");
 const missingTodo = require("../mooks/missingTodo.json");
-
+let firstTodo;
 // define the hook that is launched each test 📸
 beforeEach(() => {
   connect();
@@ -21,15 +21,18 @@ describe(`${endPoint} API `, () => {
       .expect(200);
     expect(Array.isArray(response.body)).toBe(true);
     expect(response.body[0].title).toBeDefined();
+    firstTodo = response.body[0];
   });
   // TEST GOOD:#2 💚
-  it(`GET ONE ${endPoint} RETURN 203 AND TODO`, async () => {
+  it(` GET ONE ${endPoint} RETURN ONE TODO `, async () => {
     const response = await request(app)
-      .get(`${endPoint}/616232ee991815ea70874878`)
-      .expect(203);
-    // expect(response.body).
+      .get(endPoint + firstTodo._id)
+      .expect("Content-Type", /json/)
+      .expect(200);
+    expect(response.body.title).toBe(firstTodo.title);
+    expect(response.body.done).toBe(firstTodo.done);
   });
-  // TEST GOOD:#2 💚
+  // TEST GOOD:#3 💚
   it(`POST ${endPoint} RETURN 201`, async () => {
     const response = await request(app)
       .post(endPoint)
@@ -39,12 +42,9 @@ describe(`${endPoint} API `, () => {
     expect(response.body.done).toBe(oneTodo.done);
     expect(response.body).toMatchObject(oneTodo);
   });
-  // TEST BAD:#3 💔
+  // TEST BAD:#4 💔
   it(`POST ${endPoint} MISSING DATA`, async () => {
-    const response = await request(app)
-      .post(endPoint)
-      .send(missingTodo)
-      .expect(500);
+    await request(app).post(endPoint).send(missingTodo).expect(500);
   });
 });
 
